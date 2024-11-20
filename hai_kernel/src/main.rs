@@ -1,7 +1,8 @@
 #![no_std]
 #![no_main]
 
-mod interrupts;
+mod interrupt;
+mod memory;
 
 #[uefi::entry]
 #[cfg(target_os = "uefi")]
@@ -17,7 +18,7 @@ fn efi_main() -> uefi::Status {
 
 #[inline(never)]
 fn kernel_main() {
-    interrupts::enable();
+    interrupt::enable();
 
     loop {}
 }
