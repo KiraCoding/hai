@@ -1,5 +1,5 @@
 #[inline(always)]
-pub(crate) fn enable() {
+pub fn enable() {
     #[cfg(target_arch = "aarch64")]
     aarch64::irq::enable();
 
