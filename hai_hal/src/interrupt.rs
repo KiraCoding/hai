@@ -1,7 +1,7 @@
 use core::arch::asm;
 
 /// Enable interrupts.
-#[inline(always)]
+#[inline]
 pub fn enable() {
     unsafe {
         #[cfg(target_arch = "aarch64")]
@@ -19,7 +19,7 @@ pub fn enable() {
 }
 
 /// Disable interrupts.
-#[inline(always)]
+#[inline]
 pub fn disable() {
     unsafe {
         #[cfg(target_arch = "aarch64")]
@@ -37,7 +37,7 @@ pub fn disable() {
 }
 
 /// Places the CPU into a low-power state, awaiting an interrupt.
-#[inline(always)]
+#[inline]
 pub fn wait() {
     unsafe {
         #[cfg(any(target_arch = "aarch64", target_arch = "riscv64"))]
