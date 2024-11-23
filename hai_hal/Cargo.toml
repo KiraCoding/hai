@@ -1,13 +1,7 @@
 [package]
-name = "hai_kernel"
+name = "hai_hal"
 version = "0.1.0"
 edition = "2021"
-
-[dependencies]
-hai_hal = { path = "../hai_hal" }
-
-[target.'cfg(target_os = "uefi")'.dependencies]
-uefi = { version = "0.33.0", features = ["panic_handler"] }
 
 [target.'cfg(target_arch = "aarch64")'.dependencies]
 aarch64 = "0.0.13"

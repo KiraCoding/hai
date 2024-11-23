@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["hai_kernel"]
+members = [ "hai_hal","hai_kernel"]
 
 [profile.release]
 codegen-units = 1

@@ -3,6 +3,7 @@
 
 mod interrupt;
 mod memory;
+mod paging;
 
 use memory::MemoryMap;
 
@@ -13,14 +14,16 @@ fn efi_main() -> uefi::Status {
 
     let mmap = unsafe { exit_boot_services(MemoryType::CONVENTIONAL) };
 
-    kernel_main(BootInfo::new(mmap));
+    kernel_main();
 
     uefi::Status::SUCCESS
 }
 
 #[inline(never)]
-fn kernel_main(_boot_info: BootInfo) {
-    interrupt::enable();
+fn kernel_main() {
+    // interrupt::enable();
+
+    hai_hal::interrupt::enable();
 
     loop {}
 }

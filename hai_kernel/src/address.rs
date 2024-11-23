@@ -1,5 +1,10 @@
 #[repr(transparent)]
-pub struct PhysicalAddress(usize);
+pub struct Physical(u64);
 
 #[repr(transparent)]
-pub struct VirtualAddress(usize);
+pub struct Virtual(u64);
+
+pub enum Address {
+    Virtual(Virtual),
+    Physical(Physical),
+}
