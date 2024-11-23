@@ -1,5 +1,7 @@
 #![no_std]
 #![no_main]
+#![warn(clippy::all)]
+#![warn(clippy::nursery)]
 
 mod interrupt;
 mod memory;
@@ -23,7 +25,9 @@ fn efi_main() -> uefi::Status {
 fn kernel_main() {
     hai_hal::interrupt::enable();
 
-    loop {}
+    loop {
+        hai_hal::interrupt::wait();
+    }
 }
 
 pub struct BootInfo {

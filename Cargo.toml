@@ -1,6 +1,7 @@
 [workspace]
 resolver = "2"
-members = [ "hai_hal","hai_kernel"]
+members = ["hai_hal", "hai_kernel"]
+package.repository = "https://github.com/KiraCoding/hai"
 
 [profile.release]
 codegen-units = 1

@@ -2,6 +2,10 @@
 name = "hai_kernel"
 version = "0.1.0"
 edition = "2021"
+license = "MIT"
+readme = "README.md"
+description = ""
+repository.workspace = true
 
 [dependencies]
 hai_hal = { path = "../hai_hal" }
