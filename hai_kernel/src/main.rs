@@ -12,7 +12,7 @@ use memory::MemoryMap;
 fn efi_main() -> uefi::Status {
     use uefi::boot::{exit_boot_services, MemoryType};
 
-    let mmap = unsafe { exit_boot_services(MemoryType::CONVENTIONAL) };
+    let _mmap = unsafe { exit_boot_services(MemoryType::CONVENTIONAL) };
 
     kernel_main();
 
@@ -21,8 +21,6 @@ fn efi_main() -> uefi::Status {
 
 #[inline(never)]
 fn kernel_main() {
-    // interrupt::enable();
-
     hai_hal::interrupt::enable();
 
     loop {}

@@ -9,7 +9,7 @@ pub fn enable() {
 
     #[cfg(target_arch = "x86_64")]
     unsafe {
-        asm!("sti", options(preserves_flags, nostack))
+        asm!("sti", options(nostack, preserves_flags))
     };
 
     #[cfg(target_arch = "riscv64")]
