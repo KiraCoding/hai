@@ -7,8 +7,6 @@ mod interrupt;
 mod memory;
 mod paging;
 
-use memory::MemoryMap;
-
 #[uefi::entry]
 #[cfg(target_os = "uefi")]
 fn efi_main() -> uefi::Status {
@@ -30,12 +28,3 @@ fn kernel_main() {
     }
 }
 
-pub struct BootInfo {
-    pub mmap: MemoryMap,
-}
-
-impl BootInfo {
-    pub fn new(mmap: impl Into<MemoryMap>) -> Self {
-        Self { mmap: mmap.into() }
-    }
-}
