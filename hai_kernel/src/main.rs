@@ -4,7 +4,6 @@
 #![warn(clippy::nursery)]
 
 mod interrupt;
-mod memory;
 mod paging;
 
 #[uefi::entry]
