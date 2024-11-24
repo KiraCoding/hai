@@ -7,3 +7,4 @@
 pub mod address;
 pub mod interrupt;
 pub mod memory;
+pub mod paging;
