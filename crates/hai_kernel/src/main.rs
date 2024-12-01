@@ -3,7 +3,6 @@
 #![warn(clippy::all)]
 #![warn(clippy::nursery)]
 
-mod interrupt;
 mod paging;
 
 #[uefi::entry]
