@@ -3,3 +3,6 @@ name = "x86_64"
 version = "0.1.0"
 edition = "2024"
 repository.workspace = true
+
+[dependencies]
+bitflags = "2.6.0"

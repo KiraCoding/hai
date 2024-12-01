@@ -1,5 +1,3 @@
-use core::arch::asm;
-
 /// Enable interrupts.
 #[inline]
 pub fn enable() {
