@@ -3,8 +3,6 @@
 #![warn(clippy::all)]
 #![warn(clippy::nursery)]
 
-mod paging;
-
 #[uefi::entry]
 #[cfg(target_os = "uefi")]
 fn efi_main() -> uefi::Status {
