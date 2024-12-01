@@ -20,8 +20,5 @@ fn efi_main() -> uefi::Status {
 
 #[inline(never)]
 fn kernel_main() {
-    loop {
-        hai_hal::interrupt::wait();
-    }
+    loop {}
 }
-

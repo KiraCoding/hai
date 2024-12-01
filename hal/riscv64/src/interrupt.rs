@@ -10,3 +10,14 @@ pub fn enable() {
         )
     };
 }
+
+/// Disable interrupts.
+#[inline]
+pub fn disable() {
+    unsafe {
+        asm!(
+            "csrci sstatus, 0x2",
+            options(nomem, nostack, preserves_flags)
+        )
+    };
+}
