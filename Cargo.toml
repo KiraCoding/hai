@@ -1,6 +1,6 @@
 [workspace]
 resolver = "2"
-members = ["hai_hal", "hai_kernel"]
+members = ["crates/*", "hal/*"]
 package.repository = "https://github.com/KiraCoding/hai"
 
 [profile.release]

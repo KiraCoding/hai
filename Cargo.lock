@@ -3,6 +3,10 @@
 version = 4
 
 [[package]]
+name = "aarch64"
+version = "0.1.0"
+
+[[package]]
 name = "bit_field"
 version = "0.10.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -24,7 +28,10 @@ checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 name = "hai_hal"
 version = "0.1.0"
 dependencies = [
+ "aarch64",
+ "riscv64",
  "uefi",
+ "x86_64",
 ]
 
 [[package]]
@@ -78,6 +85,10 @@ checksum = "b5b9d34b8991d19d98081b46eacdd8eb58c6f2b201139f7c5f643cc155a633af"
 dependencies = [
  "proc-macro2",
 ]
+
+[[package]]
+name = "riscv64"
+version = "0.1.0"
 
 [[package]]
 name = "syn"
@@ -159,3 +170,7 @@ name = "unicode-ident"
 version = "1.0.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "adb9e6ca4f869e1180728b7950e35922a7fc6397f7b641499e8f3ef06e50dc83"
+
+[[package]]
+name = "x86_64"
+version = "0.1.0"
