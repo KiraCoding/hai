@@ -47,6 +47,7 @@ dependencies = [
 name = "hai_kernel"
 version = "0.1.0"
 dependencies = [
+ "cpu64",
  "hai_hal",
  "uefi",
 ]

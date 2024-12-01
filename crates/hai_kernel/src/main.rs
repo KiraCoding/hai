@@ -17,5 +17,7 @@ fn efi_main() -> uefi::Status {
 
 #[inline(never)]
 fn kernel_main() {
+    cpu64::interrupt::enable();
+
     loop {}
 }
