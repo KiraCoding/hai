@@ -29,7 +29,7 @@ impl CR3 {
 
     #[inline]
     pub unsafe fn read_pci_unchecked() -> Self {
-        let cr3 = unsafe { Self::read_raw() };
+        let _cr3 = unsafe { Self::read_raw() };
 
         todo!()
     }
