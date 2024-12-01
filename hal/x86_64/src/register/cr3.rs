@@ -1,3 +1,4 @@
+use crate::register::CR4;
 use bitflags::bitflags;
 use core::arch::asm;
 
@@ -7,10 +8,32 @@ bitflags! {
     pub struct CR3: u64 {
         const PWT = 1 << 3;
         const PCD = 1 << 4;
+        const PCID = 1 << 11;
     }
 }
 
 impl CR3 {
+    #[inline]
+    pub unsafe fn read() -> Self {
+        unsafe { assert!(!CR4::read().contains(CR4::PCIDE)) };
+
+        todo!()
+    }
+
+    #[inline]
+    pub unsafe fn read_pci() -> Self {
+        unsafe { assert!(CR4::read().contains(CR4::PCIDE)) };
+
+        todo!()
+    }
+
+    #[inline]
+    pub unsafe fn read_pci_unchecked() -> Self {
+        let cr3 = unsafe { Self::read_raw() };
+
+        todo!()
+    }
+
     /// Reads the raw value of the CR3 register, which holds the address of the Level 4 Page Table.
     ///
     /// # Safety
