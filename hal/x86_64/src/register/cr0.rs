@@ -47,21 +47,22 @@ bitflags! {
         const CD = 1 << 30;
 
         /// Paging
-        /// - If 1, enable paging and use the § CR3 register, else disable paging. 
+        /// - If 1, enable paging and use the § CR3 register, else disable paging.
         const PG = 1 << 31;
     }
 }
 
 impl CR0 {
     #[inline]
-    pub unsafe fn read() -> Self {
-        let cr3: u64;
-        unsafe { asm!("mov {}, cr3", out(reg) cr3, options(nomem, nostack, preserves_flags)) };
-        Self::from_bits_truncate(cr3)
+    pub fn read() -> Self {
+        let cr0: u64;
+        unsafe { asm!("mov {}, cr0", out(reg) cr0, options(nomem, nostack, preserves_flags)) };
+        Self::from_bits_truncate(cr0)
     }
 
     #[inline]
-    pub unsafe fn write(cr3: Self) {
-        unsafe { asm!("mov cr3, {}", in(reg) cr3.bits(), options(nomem, nostack, preserves_flags)) }
+    pub unsafe fn write(flags: Self) {
+        let flags = (Self::read().bits() & !flags.bits()) | flags.bits();
+        unsafe { asm!("mov cr0, {}", in(reg) flags, options(nomem, nostack, preserves_flags)) }
     }
 }
