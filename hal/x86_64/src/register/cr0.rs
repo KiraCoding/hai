@@ -55,9 +55,9 @@ bitflags! {
 impl CR0 {
     #[inline]
     pub fn read() -> Self {
-        let cr0: u64;
-        unsafe { asm!("mov {}, cr0", out(reg) cr0, options(nomem, nostack, preserves_flags)) };
-        Self::from_bits_truncate(cr0)
+        let flags: u64;
+        unsafe { asm!("mov {}, cr0", out(reg) flags, options(nomem, nostack, preserves_flags)) };
+        Self::from_bits_truncate(flags)
     }
 
     #[inline]
