@@ -34,21 +34,10 @@ dependencies = [
 ]
 
 [[package]]
-name = "hai_hal"
-version = "0.1.0"
-dependencies = [
- "aarch64",
- "riscv64",
- "uefi",
- "x86_64",
-]
-
-[[package]]
 name = "hai_kernel"
 version = "0.1.0"
 dependencies = [
  "cpu64",
- "hai_hal",
  "uefi",
 ]
 
