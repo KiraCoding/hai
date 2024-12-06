@@ -14,21 +14,21 @@ bitflags! {
 
 impl CR3 {
     #[inline]
-    pub unsafe fn read() -> Self {
+    pub fn read() -> Self {
         unsafe { assert!(!CR4::read().contains(CR4::PCIDE)) };
 
         todo!()
     }
 
     #[inline]
-    pub unsafe fn read_pci() -> Self {
+    pub fn read_pci() -> Self {
         unsafe { assert!(CR4::read().contains(CR4::PCIDE)) };
 
         todo!()
     }
 
     #[inline]
-    pub unsafe fn read_pci_unchecked() -> Self {
+    pub fn read_pci_unchecked() -> Self {
         let _cr3 = unsafe { Self::read_raw() };
 
         todo!()
