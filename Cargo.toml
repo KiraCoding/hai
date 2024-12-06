@@ -1,7 +1,12 @@
 [workspace]
 resolver = "2"
 members = ["crates/*", "hal/*"]
-package.repository = "https://github.com/KiraCoding/hai"
+
+[workspace.package]
+edition = "2024"
+license = "MIT"
+authors = ["KiraCoding"]
+repository = "https://github.com/KiraCoding/hai"
 
 [profile.release]
 codegen-units = 1
