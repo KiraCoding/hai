@@ -3,9 +3,10 @@ resolver = "2"
 members = ["crates/*", "hal/*"]
 
 [workspace.package]
+publish = false
 edition = "2024"
 license = "MIT"
-authors = ["KiraCoding"]
+authors = ["Kira"]
 repository = "https://github.com/KiraCoding/hai"
 
 [profile.release]
