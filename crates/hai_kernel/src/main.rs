@@ -3,21 +3,27 @@
 #![warn(clippy::all)]
 #![warn(clippy::nursery)]
 
+use uefi::mem::memory_map::MemoryMapOwned;
+
 #[uefi::entry]
 #[cfg(target_os = "uefi")]
 fn efi_main() -> uefi::Status {
     use uefi::boot::{exit_boot_services, MemoryType};
 
-    let _mmap = unsafe { exit_boot_services(MemoryType::CONVENTIONAL) };
+    let mmap = unsafe { exit_boot_services(MemoryType::CONVENTIONAL) };
 
-    kernel_main();
+    kernel_main(Args { mmap });
 
     uefi::Status::SUCCESS
 }
 
 #[inline(never)]
-fn kernel_main() {
+fn kernel_main(args: Args) {
     cpu64::interrupt::enable();
 
     loop {}
+}
+
+struct Args {
+    mmap: MemoryMapOwned,
 }

@@ -29,18 +29,13 @@ impl CR3 {
 
     #[inline]
     pub fn read_pci_unchecked() -> Self {
-        let _cr3 = unsafe { Self::read_raw() };
+        let _cr3 = Self::read_raw();
 
         todo!()
     }
 
-    /// Reads the raw value of the CR3 register, which holds the address of the Level 4 Page Table.
-    ///
-    /// # Safety
-    /// Accessing control registers directly is unsafe and may cause undefined behavior if done
-    /// in the wrong context (e.g., outside of kernel or privileged modes).
     #[inline]
-    pub unsafe fn read_raw() -> Self {
+    pub fn read_raw() -> Self {
         let cr3: u64;
         unsafe { asm!("mov {}, cr3", out(reg) cr3, options(nomem, nostack, preserves_flags)) };
         Self::from_bits_truncate(cr3)
