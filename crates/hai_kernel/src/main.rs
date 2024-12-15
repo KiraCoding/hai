@@ -1,7 +1,5 @@
 #![no_std]
 #![no_main]
-#![warn(clippy::all)]
-#![warn(clippy::nursery)]
 
 use uefi::mem::memory_map::MemoryMapOwned;
 

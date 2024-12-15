@@ -9,6 +9,10 @@ license = "MIT"
 authors = ["Kira"]
 repository = "https://github.com/KiraCoding/hai"
 
+[workspace.lints.clippy]
+nursery = "warn"
+cargo = "warn"
+
 [profile.release]
 codegen-units = 1
 lto = true
