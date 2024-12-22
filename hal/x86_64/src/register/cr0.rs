@@ -62,7 +62,15 @@ impl CR0 {
 
     #[inline]
     pub unsafe fn write(flags: Self) {
-        let flags = (Self::read().bits() & !flags.bits()) | flags.bits();
-        unsafe { asm!("mov cr0, {}", in(reg) flags, options(nomem, nostack, preserves_flags)) }
+        unsafe {
+            asm!("mov cr0, {}", in(reg) flags.bits(), options(nomem, nostack, preserves_flags))
+        }
+    }
+
+    #[inline]
+    pub unsafe fn update(f: impl FnOnce(&mut Self)) {
+        let mut cr0 = Self::read();
+        f(&mut cr0);
+        unsafe { Self::write(cr0); };
     }
 }

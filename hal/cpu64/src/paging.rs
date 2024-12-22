@@ -3,3 +3,7 @@
 pub struct PageTable {
     entries: [u64; 512],
 }
+
+fn enable() {}
+
+fn disable() {}
