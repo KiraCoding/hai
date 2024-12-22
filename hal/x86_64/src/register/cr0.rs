@@ -3,7 +3,7 @@ use core::arch::asm;
 
 bitflags! {
     #[repr(transparent)]
-    #[derive(Debug)]
+    #[derive(Debug, Clone, Copy, PartialEq, Eq)]
     pub struct CR0: u64 {
         /// **P**rotected **M**ode **E**nable
         /// - If 1, system is in protected mode, else, system is in real mode.
@@ -57,7 +57,7 @@ impl CR0 {
     pub fn read() -> Self {
         let flags: u64;
         unsafe { asm!("mov {}, cr0", out(reg) flags, options(nomem, nostack, preserves_flags)) };
-        Self::from_bits_truncate(flags)
+        Self::from_bits_retain(flags)
     }
 
     #[inline]
@@ -71,6 +71,6 @@ impl CR0 {
     pub unsafe fn update(f: impl FnOnce(&mut Self)) {
         let mut cr0 = Self::read();
         f(&mut cr0);
-        unsafe { Self::write(cr0); };
+        unsafe { Self::write(cr0) };
     }
 }
