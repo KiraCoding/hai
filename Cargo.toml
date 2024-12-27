@@ -16,3 +16,6 @@ cargo = "warn"
 [profile.release]
 codegen-units = 1
 lto = true
+
+[profile.qemu]
+inherits = "dev"
