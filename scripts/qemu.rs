@@ -41,7 +41,7 @@ fn main() {
             "-drive",
             &format!("if=pflash,format=raw,readonly=on,file={}", VARS),
             "-drive",
-            "format=raw,file=fat:rw:esp",
+            "format=raw,file=fat:rw:./target/x86_64-unknown-uefi/qemu/esp",
         ])
         .status()
         .unwrap();
