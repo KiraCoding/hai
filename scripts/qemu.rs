@@ -3,23 +3,27 @@
 //! ```cargo
 //! [package]
 //! edition = "2024"
+//! 
+//! [dependencies]
+//! clap = { version = "4.5.23", features = ["derive"] }
 //! ```
 
+use clap::Parser;
+use std::env::args;
 use std::fs::{copy, create_dir_all};
 use std::process::Command;
 
 const CODE: &str = "./tools/ovmf/x86_64/code.fd";
 const VARS: &str = "./tools/ovmf/x86_64/vars.fd";
 
+#[derive(Parser)]
+struct Args {}
+
 fn main() {
+    let target = &args().nth(1).unwrap();
+
     let build = Command::new("cargo")
-        .args(&[
-            "build",
-            "--profile",
-            "qemu",
-            "--target",
-            "x86_64-unknown-uefi",
-        ])
+        .args(&["build", "--profile", "qemu", "--target", target])
         .status()
         .unwrap();
 
