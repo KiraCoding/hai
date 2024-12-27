@@ -1,5 +1,10 @@
 #!/usr/bin/env cargo
 
+//! ```cargo
+//! [package]
+//! edition = "2024"
+//! ```
+
 use std::fs::create_dir_all;
 use std::process::Command;
 
