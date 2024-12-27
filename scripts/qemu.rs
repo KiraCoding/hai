@@ -14,7 +14,6 @@ const VARS: &str = "./tools/ovmf/x86_64/vars.fd";
 
 fn main() {
     let target = &args().nth(1).unwrap();
-    let src = &args().nth(2).unwrap();
 
     let build = Command::new("cargo")
         .args(&["build", "--profile", "qemu", "--target", target])
