@@ -17,6 +17,4 @@ cpu64 = { path = "../cpu64" }
 uefi = { version = "0.33.0", features = ["panic_handler", "alloc", "global_allocator", "logger"] }
 
 [profile.qemu]
-inherits = "release"
-debug = true
-lto = true
+inherits = "dev"
