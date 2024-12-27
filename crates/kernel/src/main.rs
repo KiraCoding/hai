@@ -1,8 +1,6 @@
 #![no_std]
 #![no_main]
 
-use uefi::mem::memory_map::MemoryMapOwned;
-
 #[uefi::entry]
 #[cfg(target_os = "uefi")]
 fn efi_main() -> uefi::Status {
@@ -24,19 +22,15 @@ fn efi_main() -> uefi::Status {
         _ => (),
     });
 
-    kernel_main(Args { mmap });
+    kernel_main();
 
     uefi::Status::SUCCESS
 }
 
 #[inline(never)]
-fn kernel_main(_args: Args) {
+fn kernel_main() {
     //! TODO: setup idt before enabling interrupts
     // cpu64::interrupt::enable();
 
     loop {}
-}
-
-struct Args {
-    mmap: MemoryMapOwned,
 }
