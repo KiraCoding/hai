@@ -34,7 +34,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "hai_kernel"
+name = "kernel"
 version = "0.1.0"
 dependencies = [
  "cpu64",

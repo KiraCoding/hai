@@ -1,5 +1,5 @@
 [package]
-name = "hai_kernel"
+name = "kernel"
 version = "0.1.0"
 edition = "2021"
 readme = "README.md"
@@ -11,7 +11,12 @@ repository.workspace = true
 workspace = true
 
 [dependencies]
-cpu64 = { path = "../../hal/cpu64" }
+cpu64 = { path = "../cpu64" }
 
 [target.'cfg(target_os = "uefi")'.dependencies]
-uefi = { version = "0.33.0", features = ["panic_handler"] }
+uefi = { version = "0.33.0", features = ["panic_handler", "alloc", "global_allocator", "logger"] }
+
+[profile.qemu]
+inherits = "release"
+debug = true
+lto = true
