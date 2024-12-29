@@ -18,21 +18,21 @@ fn main() -> Result<()> {
         .nth(1)
         .ok_or_else(|| Error::new(ErrorKind::InvalidInput, "Missing target argument"))?;
 
-    let build = Command::new("cargo")
-        .args(&["build", "--profile", "qemu", "--target", &target])
-        .status()?;
+    let qemu = match target.as_str() {
+        "aarch64-unknown-uefi" => "qemu-system-aarch64",
+        "x86_64-unknown-uefi" => "qemu-system-x86_64",
+        _ => unimplemented!(),
+    };
 
-    if !build.success() {
-        return Err(Error::new(ErrorKind::Other, "Build failed"));
-    }
+    let binary = args().last().unwrap();
 
     create_dir_all("./target/x86_64-unknown-uefi/qemu/esp/efi/boot")?;
     copy(
-        "./target/x86_64-unknown-uefi/qemu/kernel.efi",
+        &binary,
         "./target/x86_64-unknown-uefi/qemu/esp/efi/boot/bootx64.efi",
     )?;
 
-    Command::new("qemu-system-x86_64")
+    Command::new(qemu)
         .args(&[
             "-drive",
             &format!("if=pflash,format=raw,readonly=on,file={}", CODE),
