@@ -39,7 +39,7 @@ fn main() -> Result<()> {
             "-drive",
             &format!("if=pflash,format=raw,readonly=on,file={}", VARS),
             "-drive",
-            "format=raw,file=fat:rw:./target/x86_64-unknown-uefi/qemu/esp",
+            "format=raw,file=fat:rw:target/x86_64-unknown-uefi/qemu/esp",
         ])
         .status()?;
 
