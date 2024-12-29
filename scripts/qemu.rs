@@ -14,12 +14,12 @@ const CODE: &str = "./tools/ovmf/x86_64/code.fd";
 const VARS: &str = "./tools/ovmf/x86_64/vars.fd";
 
 fn main() -> Result<()> {
-    let target = &args()
+    let target = args()
         .nth(1)
         .ok_or_else(|| Error::new(ErrorKind::InvalidInput, "Missing target argument"))?;
 
     let build = Command::new("cargo")
-        .args(&["build", "--profile", "qemu", "--target", target])
+        .args(&["build", "--profile", "qemu", "--target", &target])
         .status()?;
 
     if !build.success() {
