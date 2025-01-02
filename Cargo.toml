@@ -17,6 +17,3 @@ cargo = "warn"
 codegen-units = 1
 strip = true
 lto = true
-
-[profile.qemu]
-inherits = "dev"
