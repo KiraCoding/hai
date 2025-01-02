@@ -25,18 +25,18 @@ fn main() -> Result<()> {
         "Missing binary argument",
     ))?;
 
-    let qemu = match target.as_str() {
-        "aarch64-unknown-uefi" => "qemu-system-aarch64",
-        "x86_64-unknown-uefi" => "qemu-system-x86_64",
-        _ => unimplemented!(),
-    };
-
     let esp = Path::new(&binary).parent().unwrap().join("esp");
     let boot = esp.join("efi").join("boot");
     let dst = esp.join("bootx64.efi");
 
     create_dir_all(&boot)?;
     copy(&binary, &dst)?;
+
+    let qemu = match target.as_str() {
+        "aarch64-unknown-uefi" => "qemu-system-aarch64",
+        "x86_64-unknown-uefi" => "qemu-system-x86_64",
+        _ => unimplemented!(),
+    };
 
     Command::new(qemu)
         .args(&[
