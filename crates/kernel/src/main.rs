@@ -49,3 +49,12 @@ pub struct BootInfo {
 pub enum Kind {
     Uefi { time: u64 },
 }
+
+pub struct MemoryMap {
+    entries: &'static [MemoryEntry],
+}
+
+pub struct MemoryEntry {
+    start: u64,
+    size: u64,
+}
