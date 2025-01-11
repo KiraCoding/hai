@@ -4,7 +4,9 @@
 #[uefi::entry]
 #[cfg(target_os = "uefi")]
 fn efi_main() -> uefi::Status {
-    use uefi::boot::{exit_boot_services, image_handle, open_protocol_exclusive, MemoryType};
+    use uefi::boot::{
+        exit_boot_services, get_handle_for_protocol, open_protocol_exclusive, MemoryType,
+    };
     use uefi::mem::memory_map::MemoryMap;
     use uefi::proto::console::gop::GraphicsOutput;
     use uefi::runtime::get_time;
@@ -17,7 +19,8 @@ fn efi_main() -> uefi::Status {
     let time_start = efi_time();
 
     let frame_buffer = {
-        let mut gop = open_protocol_exclusive::<GraphicsOutput>(image_handle()).unwrap();
+        let gop_handle = get_handle_for_protocol::<GraphicsOutput>().unwrap();
+        let mut gop = open_protocol_exclusive::<GraphicsOutput>(gop_handle).unwrap();
         let mode_info = gop.current_mode_info();
         let mut frame_buffer = gop.frame_buffer();
         let ptr = frame_buffer.as_mut_ptr();
@@ -48,7 +51,10 @@ fn efi_main() -> uefi::Status {
 
 #[inline(never)]
 fn kernel_main(info: BootInfo) {
-    let BootInfo { efi_time, frame_buffer } = info;
+    let BootInfo {
+        efi_time,
+        frame_buffer,
+    } = info;
 
     // TODO: setup idt before enabling interrupts
     // cpu64::interrupt::enable();
@@ -72,4 +78,8 @@ pub struct MemoryEntry {
 
 pub struct FrameBuffer {
     ptr: *mut u8,
+}
+
+impl FrameBuffer {
+    fn write() {}
 }
