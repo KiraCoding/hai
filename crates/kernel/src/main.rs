@@ -4,9 +4,8 @@
 #[uefi::entry]
 #[cfg(target_os = "uefi")]
 fn efi_main() -> uefi::Status {
-    use uefi::boot::{
-        exit_boot_services, get_handle_for_protocol, open_protocol_exclusive, MemoryType,
-    };
+    use uefi::boot::{exit_boot_services, MemoryType};
+    use uefi::boot::{get_handle_for_protocol, open_protocol_exclusive};
     use uefi::mem::memory_map::MemoryMap;
     use uefi::proto::console::gop::GraphicsOutput;
     use uefi::runtime::get_time;

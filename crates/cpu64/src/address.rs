@@ -1,5 +1,5 @@
 #[repr(transparent)]
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct VirtualAddress(u64);
 
 impl From<u64> for VirtualAddress {
@@ -10,7 +10,7 @@ impl From<u64> for VirtualAddress {
 }
 
 #[repr(transparent)]
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct PhysicalAddress(u64);
 
 impl From<u64> for PhysicalAddress {
