@@ -7,10 +7,14 @@ pub type Interrupt = extern "x86-interrupt" fn(_: u8);
 /// A trap handler.
 pub type Trap = extern "x86-interrupt" fn(_: u8, error_code: u64);
 
+#[repr(C)]
+#[derive(Debug)]
+pub struct Table([Descriptor<Interrupt>; 255]);
+
 /// An interrupt descriptor.
 #[repr(C, packed)]
 #[derive(Debug)]
-pub struct Descriptor<P> {
+pub struct Descriptor<F> {
     lower: u16,
     selector: u16,
     ist: u8,
@@ -18,7 +22,23 @@ pub struct Descriptor<P> {
     middle: u16,
     high: u32,
     reserved: u32,
-    _phantom: PhantomData<P>,
+    phantom: PhantomData<F>,
+}
+
+impl<F> Descriptor<F> {
+    #[inline]
+    pub const fn empty() -> Self {
+        Self {
+            lower: 0,
+            selector: 0,
+            ist: 0,
+            flags: 0,
+            middle: 0,
+            high: 0,
+            reserved: 0,
+            phantom: PhantomData,
+        }
+    }
 }
 
 impl Descriptor<Interrupt> {}
