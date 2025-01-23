@@ -2,10 +2,10 @@ use core::arch::asm;
 use core::marker::PhantomData;
 
 /// An interrupt handler.
-pub type Interrupt = fn();
+pub type Interrupt = extern "x86-interrupt" fn(_: u8);
 
 /// A trap handler.
-pub type Trap = fn();
+pub type Trap = extern "x86-interrupt" fn(_: u8, error_code: u64);
 
 /// An interrupt descriptor.
 #[repr(C, packed)]
@@ -22,6 +22,8 @@ pub struct Descriptor<P> {
 }
 
 impl Descriptor<Interrupt> {}
+
+impl Descriptor<Trap> {}
 
 /// Enable interrupts.
 #[inline]
