@@ -1,3 +1,4 @@
+use crate::address::VirtualAddress;
 use core::arch::asm;
 use core::marker::PhantomData;
 
@@ -7,9 +8,26 @@ pub type Interrupt = extern "x86-interrupt" fn(_: u8);
 /// A trap handler.
 pub type Trap = extern "x86-interrupt" fn(_: u8, error_code: u64);
 
+/// The interrupt descriptor table.
 #[repr(C)]
 #[derive(Debug)]
 pub struct Table([Descriptor<Interrupt>; 255]);
+
+impl Table {
+    fn ptr(&self) -> Pointer {
+        Pointer {
+            limit: (size_of::<Table>() - 1) as u16,
+            base: VirtualAddress::new(self as *const _ as u64),
+        }
+    }
+}
+
+/// Pointer to the interrupt descriptor table.
+#[repr(C, packed(2))]
+pub struct Pointer {
+    limit: u16,
+    base: VirtualAddress,
+}
 
 /// An interrupt descriptor.
 #[repr(C, packed)]
@@ -55,4 +73,10 @@ pub fn enable() {
 #[inline]
 pub fn disable() {
     unsafe { asm!("cli", options(nomem, nostack, preserves_flags)) };
+}
+
+/// Load an interrupt descriptor table into the cpu.
+#[inline]
+pub fn load(table: Table) {
+    unsafe { asm!("lidt [{}]", in(reg) &table.ptr(), options(readonly, nostack, preserves_flags)) };
 }
