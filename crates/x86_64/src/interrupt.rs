@@ -14,6 +14,7 @@ pub type Trap = extern "x86-interrupt" fn(_: u8, error_code: u64);
 pub struct Table([Descriptor<Interrupt>; 255]);
 
 impl Table {
+    #[inline]
     fn ptr(&self) -> Pointer {
         Pointer {
             limit: (size_of::<Table>() - 1) as u16,
@@ -24,6 +25,7 @@ impl Table {
 
 /// Pointer to the interrupt descriptor table.
 #[repr(C, packed(2))]
+#[derive(Debug)]
 pub struct Pointer {
     limit: u16,
     base: VirtualAddress,
@@ -31,7 +33,7 @@ pub struct Pointer {
 
 /// An interrupt descriptor.
 #[repr(C, packed)]
-#[derive(Debug)]
+#[derive(Debug, Clone, Copy)]
 pub struct Descriptor<F> {
     lower: u16,
     selector: u16,

@@ -51,8 +51,8 @@ fn efi_main() -> uefi::Status {
 #[inline(never)]
 fn kernel_main(info: BootInfo) {
     let BootInfo {
-        efi_time,
-        frame_buffer,
+        efi_time: _,
+        frame_buffer: _,
     } = info;
 
     // TODO: setup idt before enabling interrupts
