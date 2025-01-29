@@ -27,10 +27,12 @@ fn kernel_main() {
     loop {}
 }
 
+#[repr(C)]
 pub struct MemoryMap {
     entries: &'static [MemoryEntry],
 }
 
+#[repr(C)]
 pub struct MemoryEntry {
     start: u64,
     size: u64,
