@@ -3,5 +3,5 @@ cargo-features = ["per-package-target"]
 [package]
 name = "aarch64"
 version = "0.1.0"
-edition = "2024"
+edition.workspace = true
 repository.workspace = true
