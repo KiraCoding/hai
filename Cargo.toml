@@ -1,12 +1,12 @@
 [workspace]
-resolver = "2"
+resolver = "3"
 members = ["crates/*"]
 
 [workspace.package]
 publish = false
 edition = "2024"
 license = "MIT"
-authors = ["Kira"]
+authors = ["Abbie"]
 repository = "https://github.com/KiraCoding/hai"
 
 [workspace.lints.clippy]
